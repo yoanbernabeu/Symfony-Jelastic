@@ -72,6 +72,7 @@ actions:
       cd /etc/apache2/sites-enabled
       rm 000-default.conf
       wget https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/config/apache.conf
+      apachectl restart
       
 success: |
   Your Symfony environment is ready to go!
