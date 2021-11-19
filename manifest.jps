@@ -1,0 +1,65 @@
+type: install
+name: Symfony
+id: symfony
+categories: ["apps/dev-and-admin-tools"]
+logo: https://symfony.com/logos/symfony_black_03.png
+homepage: https://symfony.com/
+
+description: |
+  Symfony is a PHP framework for web and console applications and a set of reusable PHP components. Symfony is used by thousands of web applications and most of the popular PHP projects.
+  
+ssl: true
+
+settings:
+  fields:
+    - caption : MySQL Root Password
+      type: string
+      name: MYSQL_ROOT_PASSWORD
+      value: "!ChangeMe!"
+
+nodes:
+  - nodeType: nginx
+    nodeGroup: bl
+    count: 1
+    cloudlets: 8
+    
+  - image: php:8.0.12-apache
+    count: 1
+    cloudlets: 16
+    nodeGroup: cp
+    volumes:
+      - /var/www
+      
+  - image: mysql:5.7
+    count: 1
+    cloudlets: 16
+    nodeGroup: sqldb
+    env:
+      MYSQL_ROOT_PASSWORD: ${settings.MYSQL_ROOT_PASSWORD}
+    volumes:
+      - /var/lib/mysql
+      
+onInstall:
+  - composer
+  - symfonycli
+  - git
+
+actions:
+  composer:
+    cmd[cp]: |-
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/bin/composer
+      chmod +x /usr/bin/composer
+    user: root
+    
+  symfonycli:
+    cmd[cp]: |-
+      wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+    user: root
+  
+  git:
+    cmd[cp]: |-
+      apt-get install -yqq --no-install-recommends git
+      
+success: |
+  Your Symfony environment is ready to go!
