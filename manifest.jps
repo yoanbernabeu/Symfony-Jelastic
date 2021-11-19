@@ -4,6 +4,7 @@ id: symfony
 categories: ["apps/dev-and-admin-tools"]
 logo: https://symfony.com/logos/symfony_black_03.png
 homepage: https://symfony.com/
+baseUrl: https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/
 
 description: |
   Symfony is a PHP framework for web and console applications and a set of reusable PHP components. Symfony is used by thousands of web applications and most of the popular PHP projects.
