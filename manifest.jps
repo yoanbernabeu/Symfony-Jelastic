@@ -31,7 +31,7 @@ nodes:
     volumes:
       - /var/www
       
-  - nodeType: mysql:5
+  - nodeType: mysql5
     count: 1
     cloudlets: 16
     nodeGroup: sqldb
