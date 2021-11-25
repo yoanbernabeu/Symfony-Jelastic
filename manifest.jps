@@ -11,13 +11,6 @@ description: |
   
 ssl: true
 
-settings:
-  fields:
-    - caption : MySQL Root Password
-      type: string
-      name: MYSQL_ROOT_PASSWORD
-      value: "!ChangeMe!"
-
 nodes:
   - nodeType: nginx
     nodeGroup: bl
@@ -36,7 +29,7 @@ nodes:
     cloudlets: 16
     nodeGroup: sqldb
     env:
-      MYSQL_ROOT_PASSWORD: ${settings.MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${fn.password}
     volumes:
       - /var/lib/mysql
       
