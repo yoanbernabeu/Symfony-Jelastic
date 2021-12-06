@@ -1,26 +1,31 @@
 type: install
-name: Symfony
-id: symfony
+name: Symfony-Jelastic
+id: Symfony-Jelastic
 categories: ["apps/dev-and-admin-tools"]
 logo: https://symfony.com/logos/symfony_black_03.png
-homepage: https://symfony.com/
+homepage: https://github.com/yoanbernabeu/Symfony-Jelastic
 baseUrl: https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/
 
 description: |
-  Symfony is a PHP framework for web and console applications and a set of reusable PHP components. Symfony is used by thousands of web applications and most of the popular PHP projects.
+  This JPS package (for Jelastic) provides a standard environment for your Symfony projects.
   
 ssl: true
 
 settings:
   fields:
-    name: database_engine
-    caption: Database Engine
-    type: list
-    values:
-      mysql5: mysql5
-      postgresql: postgresql12
-    default: mysql5
-    
+    - name: database_engine
+      caption: Database Engine
+      type: list
+      values:
+        mysql5: mysql5
+        postgresql: postgresql12
+      default: mysql5
+
+    - name: npm
+      caption: Node and NPM ?
+      type: toggle
+      value: false
+
 nodes:
   - nodeType: nginx
     nodeGroup: bl
@@ -54,6 +59,8 @@ onInstall:
       - mysql
   - if ("${settings.database_engine}" == "postgresql") :
       - postgresql
+  - if ("${settings.npm}") :
+      - npm
 
 actions:
   composer:
@@ -91,6 +98,10 @@ actions:
     cmd[cp]: |-
       apt-get install -y libpq-dev
       docker-php-ext-install pdo pdo_pgsql
+
+  npm:
+    cmd[cp]: |-
+      apt install nodejs npm
 
 success: |
   Your Symfony environment is ready to go!
