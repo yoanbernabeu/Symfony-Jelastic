@@ -17,10 +17,10 @@ settings:
     caption: Database Engine
     type: list
     values:
-      MySQL: MySQL
-      PostgreSQL: PostgreSQL
-    default: MySQL
-
+      mysql5: mysql5
+      postgresql: postgresql12
+    default: mysql5
+    
 nodes:
   - nodeType: nginx
     nodeGroup: bl
@@ -33,15 +33,17 @@ nodes:
     nodeGroup: cp
     volumes:
       - /var/www
-      
-  - nodeType: mysql5
+    
+  - nodeType: ${settings.database_engine}
     count: 1
     cloudlets: 16
     nodeGroup: sqldb
     env:
       MYSQL_ROOT_PASSWORD: ${fn.password}
+      password: ${fn.password}
     volumes:
       - /var/lib/mysql
+      - /var/lib/pgsql/data
       
 onInstall:
   - composer
