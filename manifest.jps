@@ -11,6 +11,16 @@ description: |
   
 ssl: true
 
+settings:
+  fields:
+    name: database_engine
+    caption: Database Engine
+    type: list
+    values:
+      MySQL: MySQL
+      PostgreSQL: PostgreSQL
+    default: MySQL
+
 nodes:
   - nodeType: nginx
     nodeGroup: bl
