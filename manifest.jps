@@ -50,6 +50,10 @@ onInstall:
   - symfonycli
   - git
   - apacheConf
+  - if ("${settings.database_engine}" == "mysql5") :
+      - mysql
+  - if ("${settings.database_engine}" == "postgresql") :
+      - postgresql
 
 actions:
   composer:
@@ -78,6 +82,14 @@ actions:
       rm 000-default.conf
       wget https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/config/apache.conf
       apachectl restart
-      
+  
+  mysql:
+    cmd[cp]: |-
+      docker-php-ext-install pdo pdo_mysql
+
+  postgresql:
+    cmd[cp]: |-
+      docker-php-ext-install pdo pdo_pgsql
+
 success: |
   Your Symfony environment is ready to go!
