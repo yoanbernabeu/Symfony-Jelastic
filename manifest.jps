@@ -52,6 +52,7 @@ nodes:
       
 onInstall:
   - composer
+  - symfonycli
   - git
   - apacheConf
   - if ("${settings.database_engine}" == "mysql5") :
@@ -67,6 +68,12 @@ actions:
       curl -sS https://getcomposer.org/installer | php
       mv composer.phar /usr/bin/composer
       chmod +x /usr/bin/composer
+    user: root
+  
+  symfonycli:
+    cmd[cp]: |-
+      curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
+      apt install symfony-cli
     user: root
 
   git:
