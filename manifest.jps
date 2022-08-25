@@ -3,8 +3,8 @@ name: Symfony-Jelastic
 id: Symfony-Jelastic
 categories: ["apps/dev-and-admin-tools"]
 logo: https://symfony.com/logos/symfony_black_03.png
-homepage: https://github.com/yoanbernabeu/Symfony-Jelastic
-baseUrl: https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/
+homepage: https://github.com/tonnevillec/Symfony-Jelastic
+baseUrl: https://raw.githubusercontent.com/tonnevillec/Symfony-Jelastic/main/
 
 description: |
   This JPS package (for Jelastic) provides a standard environment for your Symfony projects.
@@ -52,7 +52,6 @@ nodes:
       
 onInstall:
   - composer
-  - symfonycli
   - git
   - apacheConf
   - if ("${settings.database_engine}" == "mysql5") :
@@ -69,12 +68,7 @@ actions:
       mv composer.phar /usr/bin/composer
       chmod +x /usr/bin/composer
     user: root
-    
-  symfonycli:
-    cmd[cp]: |-
-      wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-    user: root
-  
+
   git:
     cmd[cp]: |-
       apt-get install -yqq --no-install-recommends git
