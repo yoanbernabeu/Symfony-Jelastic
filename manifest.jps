@@ -32,7 +32,7 @@ nodes:
     count: 1
     cloudlets: 8
     
-  - image: php:8.0.12-apache
+  - image: php:8.1.9-apache
     count: 1
     cloudlets: 16
     nodeGroup: cp
