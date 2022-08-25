@@ -3,8 +3,8 @@ name: Symfony-Jelastic
 id: Symfony-Jelastic
 categories: ["apps/dev-and-admin-tools"]
 logo: https://symfony.com/logos/symfony_black_03.png
-homepage: https://github.com/tonnevillec/Symfony-Jelastic
-baseUrl: https://raw.githubusercontent.com/tonnevillec/Symfony-Jelastic/main/
+homepage: https://github.com/yoanbernabeu/Symfony-Jelastic
+baseUrl: https://raw.githubusercontent.com/yoanbernabeu/Symfony-Jelastic/main/
 
 description: |
   This JPS package (for Jelastic) provides a standard environment for your Symfony projects.
